@@ -1,0 +1,28 @@
+<%= render '/layouts/customer_header' %>
+
+<div class="container">
+  <div class="row" style="padding-top: 30px">
+    <div class="col-md-3">
+      <h2>ジャンル検索</h2>
+      <% @genre.each do |genre| %>
+        <%= link_to genre.name, customer_items_path(genre_id: genre.id) %></br>
+      <% end %>
+    </div>
+    
+    <div class="col-md-5">
+      <%= image_tag @item.get_image(500, 400) %>
+    </div>
+    
+    <div class="col-md-4">
+      <h2><%= @item.name %></h2>
+      <p><%= @item.introduction %></p>
+      <h2>￥<%= @item.with_tax_price %></h2>(税込)
+      <%= form_with model: @cart_item, url: customer_cart_items_path, local: true do |f| %>
+        <%= f.hidden_field :item_id, value: @item.id%>
+        <%= f.select :amount, *[1..9] %>
+        <%= f.submit "カートに入れる", class:"btn btn-success" %>
+      <% end %>
+    </div>
+    
+  </div>
+</div>

@@ -1,0 +1,12 @@
+<%= render '/layouts/customer_header' %>
+<div class="container mx-auto">
+  <div class="row">
+    <div>
+      <h2>本当に退会しますか？</h2>
+      <p>退会すると、会員登録情報やこれまでの購入履歴が閲覧できなくなります。</p>
+      <p>退会する場合は、「退会する」をクリックしてください。</p>
+      <%= link_to "退会しない", my_page_path, class:"btn btn-primary" %>
+      <%= link_to "退会する", withdraw_path, class:"btn btn-danger", method: :patch, "data-confirm" => "本当に削除しますか？" %>
+    </div>
+  </div>
+</div>

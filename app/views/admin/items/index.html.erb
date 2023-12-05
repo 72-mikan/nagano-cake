@@ -1,0 +1,41 @@
+<%= render '/layouts/admin_header' %>
+
+<div class="container">
+  <div class="row" style="width: 100%">
+    <h2 style="margin-right: 60%">商品一覧</h2>
+    <%= link_to new_admin_item_path do %>
+      <i class="fas fa-plus h2"></i>
+    <% end %>
+  </div>
+  <div class="row" style="width: 100%">
+    <table>
+      <thead>
+        <tr class="border-top border-bottom" height="50">
+          <th width="100">商品ID</th>
+          <th width="220">商品名</th>
+          <th width="150">税抜価格</th>
+          <th width="220">ジャンル</th>
+          <th width="150">ステータス</th>
+        </tr>
+      </thead>
+      
+      <tbody>
+        <% @items.each do |item| %>
+          <tr class="border-top border-bottom" height="70">
+            <td><%= item.id %></td>
+            <td><%= item.name %></td>
+            <td><%= item.price %></td>
+            <td><%= item.genre.name %></td>
+            <td>
+              <% if item.is_active == true %>
+                <div class="text-success">販売中</div>
+              <% else %>
+                <div class="text-secondary">販売停止中</div>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,32 @@
+<%= render '/layouts/admin_header' %>
+
+<div class="container">
+  <h2>ジャンル編集</h2>
+  <div class="row">
+    
+    <% if @genre.errors.any? %>
+      <%= @genre.errors.count %>件のエラーが発生しました
+      <ul>
+        <% @genre.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    <% end %>
+    
+  </div>
+  
+  <div class="row">
+    
+    <%= form_with model: @genre, url: admin_genre_path(@genre), local: true do |f| %>
+      <table>
+        <tr>
+          <th width="150">ジャンル名</th>
+          <th width= "250"><%= f.text_field :name %></th>
+          <th><%= f.submit '変更を保存' , class:"btn btn-success"%></th>
+        </tr>
+      </table>
+    <% end %>
+    
+  </div>
+
+</div>

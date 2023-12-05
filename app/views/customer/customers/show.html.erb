@@ -1,0 +1,67 @@
+<%= render '/layouts/customer_header' %>
+<div class="container">
+  <div class="row">
+    <h2>マイページ</h2>
+  </div>
+  
+  <div class="row", style="margin: 5px">
+    <table>
+      <tr>
+        <th width="80">登録情報</th>
+        <th><%= link_to "編集", my_information_edit_path, class:"btn btn-success" %></th>
+      </tr>
+    </table>
+  </div>
+  
+  <div class="row">
+    <table border="1">
+      <tbody>
+        <tr>
+          <td width="140">氏名</td>
+          <td width="100"><%= @customer.last_name %></td>
+          <td width="100"><%= @customer.first_name %></td>
+        </tr>
+        <tr>
+          <td width="140">カナ</td>
+          <td width="100"><%= @customer.last_name_kana %></td>
+          <td width="100"><%= @customer.first_name_kana %></td>
+        </tr>
+        <tr>
+          <td width="140">郵便番号</td>
+          <td colspan="2", width="200"><%= @customer.postal_code %></td>
+        </tr>
+        <tr>
+          <td width="140">住所</td>
+          <td colspan="2", width="200"><%= @customer.address %></td>
+        </tr>
+        <tr>
+          <td width="140">電話番号</td>
+          <td colspan="2", width="200"><%= @customer.telephone_number %></td>
+        </tr>
+        <tr>
+          <td width="140">メールアドレス</td>
+          <td colspan="2", width="200"><%= @customer.email %></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  <div class="row", style="margin: 5px">
+    <table>
+      <tr>
+        <th width="80">配送先</th>
+        <th><%= link_to "一覧を見る", customer_addresses_path, class:"btn btn-success" %></th>
+      </tr>
+    </table>
+  </div>
+  
+  <div class="row", style="margin: 5px">
+    <table>
+      <tr>
+        <th width="80">注文履歴</th>
+        <th><%= link_to "一覧を見る", root_path, class:"btn btn-success" %></th>
+      </tr>
+    </table>
+  </div>
+  
+</div>

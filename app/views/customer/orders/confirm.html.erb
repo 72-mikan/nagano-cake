@@ -1,0 +1,78 @@
+<%= render '/layouts/customer_header' %>
+
+<div class="container">
+  <div class="row">
+    <h2>注文情報確認</h2>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <table border="1">
+        <tr>
+          <th colspan="2">商品名</th>
+          <th>単価(税込)</th>
+          <th>数量</th>
+          <th>小計</th>
+        </tr>
+        
+        <% @cart_items.each do |cart_item| %>
+          <tr>
+            <td><%= image_tag cart_item.item.get_image(50, 50) %></td>
+            <td><%= cart_item.item.name %></td>
+            <td><%= cart_item.item.with_tax_price %></td>
+            <td><%= cart_item.amount %></td>
+            <td><%= cart_item.subtotal %></td>
+          </tr>
+           <% @sum +=  cart_item.subtotal %>
+        <% end %>
+      </table>
+    </div>
+    
+    <div class="col-md-5 offset-md-1">
+      <table border="1">
+        <tr>
+          <td>送料</td>
+          <td><%= @postal_cost %></td>
+        </tr>
+        <tr>
+          <td>商品合計</td>
+          <td><%= @sum %></td>
+        </tr>
+        <tr>
+          <td>請求金額</td>
+          <td><%= @sum + @postal_cost %></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+  
+  <div class="row">
+    <table>
+      <tr>
+        <th>支払方法</th>
+        <td><%= Order.payment_methods_i18n[@order.payment_method] %></td>
+      </tr>
+      <tr>
+        <th>お届け先</th>
+        <td><%= '〒' + @order.postal_code + ' ' + @order.address %></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><%= @order.name %></td>
+      </tr>
+    </table>
+  </div>
+  
+  <div class="row">
+    <%= form_with model: @order, url: customer_orders_path do |f| %>
+    
+      <%= f.hidden_field :postal_code, :value => @order.postal_code %>
+      <%= f.hidden_field :address, :value => @order.address %>
+      <%= f.hidden_field :name, :value => @order.name %>
+      <%= f.hidden_field :sum, :value => @sum %>
+      <%= f.hidden_field :postal_cost, :value => @postal_cost %>
+      <%= f.hidden_field :payment_method, :value => @order.payment_method %>
+      
+      <%= f.submit '注文を確定する', data: { confirm: "購入確定しますか？"} %>
+    <% end %>
+  </div>
+</div>

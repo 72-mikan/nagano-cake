@@ -1,0 +1,33 @@
+<%= render '/layouts/customer_header' %>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-3">
+      <h2>ジャンル検索</h2>
+      <% @genre.each do |genre| %>
+        <%= link_to genre.name, customer_items_path(genre_id: genre.id) %></br>
+      <% end %>
+    </div>
+    
+    <div class="col-md-8 offset-md-1">
+      <h2><%= @item_type %></h2>
+      <p>(全<%= @item_count %>件)</p>
+      <div class="container">
+        <div class="row">
+          <% @items.each do |item| %>
+            <% if item.is_active == true %>
+              <div class="col-md-3", style="margin: 5px">
+                <%= link_to customer_item_path(item.id) do %>
+                  <%= image_tag item.get_image(200,100) %>
+                <% end %>
+                <p><%= link_to item.name, customer_item_path(item.id) %></p>
+                <p>￥<%= item.with_tax_price %></p>
+              </div>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    
+  </div>
+</div>

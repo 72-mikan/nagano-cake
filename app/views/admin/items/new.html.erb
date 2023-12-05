@@ -1,0 +1,49 @@
+<%= render '/layouts/admin_header' %>
+
+<div class="container">
+  <h2>商品新規登録</h2>
+
+  <div class="row">
+    <div class="col-md-3">
+      
+    </div>
+    
+    <div class="col-md-8 offset-md-1">
+      <%= form_with model: @item, url: admin_items_path, loacl: true do |f| %>
+        <table>
+          <tr>
+            <td>商品画像</td>
+            <td><%= f.file_field :image, accept: "image/*" %></td>
+          </tr>
+          <tr>
+            <td>商品名</td>
+            <td><%= f.text_field :name %></td>
+          </tr>
+          <tr>
+            <td>商品説明</td>
+            <td><%= f.text_area :introduction %></td>
+          </tr>
+          <tr>
+            <td>ジャンル</td>
+            <td><%= f.collection_select :genre_id, @genres, :id, :name, include_blank: "選択して下さい" %></td>
+          </tr>
+          <tr>
+            <td>税抜価格</td>
+            <td><%= f.text_field :price %></td>
+          </tr>
+          <tr>
+            <td>販売ステータス</td>
+            <td>
+              <%= f.radio_button :is_active, true %>
+              <%= f.label :is_active, '販売中', value: true %>
+              <%= f.radio_button :is_active, false %>
+              <%= f.label :is_active, '販売停止中', value: false%>
+            </td>
+          </tr>
+        </table>
+        <%= f.submit "新規登録", class:"btn btn-success" %>
+      <% end %>
+    </div>
+    
+  </div>
+</div>
