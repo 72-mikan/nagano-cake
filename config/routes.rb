@@ -39,5 +39,7 @@ Rails.application.routes.draw do
   
   delete '/customer/cart_items' => 'customer/cart_items#destroy_all', as: :customer_cart_item_destroy
   
+  
+  
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
