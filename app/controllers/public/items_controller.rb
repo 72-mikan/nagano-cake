@@ -1,4 +1,4 @@
-class Customer::ItemsController < ApplicationController
+class Public::ItemsController < ApplicationController
   
   def index
     puts 'test'

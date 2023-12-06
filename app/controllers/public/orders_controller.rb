@@ -1,5 +1,4 @@
-class Customer::OrdersController < ApplicationController
-  
+class Public::OrdersController < ApplicationController
   def new
     @order = Order.new
     @customer = current_customer
@@ -7,68 +6,69 @@ class Customer::OrdersController < ApplicationController
       redirect_to customer_items_path
     end
   end
-  
+
   def confirm
     @order = Order.new(order_params)
     @customer = current_customer
-    
-    select_payment_method = params[:order][:payment_method]
-    if select_payment_method != 'credit_card' && select_payment_method != 'transfer'
-      render :new
-      return
-    end
-    
+    @order.customer_id = @customer.id
+
+    # 配送先選択処理
     select_address = params[:order][:select_address]
     if select_address == '0'
-      @order = my_address(@order)
+      # 自身の住所セット
+      @order = set_order_address(@order, @customer.postal_code, @customer.address, @customer.full_name)
     elsif select_address == '1'
+      # 登録済み住所セット
       address = Address.find(params[:order][:address_id])
-      @order = registered_address(@order, address)
-    elsif select_address != '2'
-      render :new
-      return
+      @order = set_order_address(address.postal_code, address.address, address.name)
     end
-    @postal_cost = 800
-    @cart_items = current_customer.cart_items
-    @sum = 0
-    render :confirm
+
+    # 送料セット
+    @order.shipping_cost = Constants::SHIPPING_COST
+
+    # **処理重**
+    @order.total_payment = @customer.cart_item_total_payment
+
+    if @order.valid?
+      @cart_items = current_customer.cart_items
+      @sum = 0
+      render :confirm
+    else
+      render :new
+    end
   end
-  
+
   def complete
   end
-  
+
   def create
-    order = order_confirmed
+    order = Order.new(order_params)
+    order.customer_id = current_customer.id
+    order.total_payment = params[:order][:sum].to_i + params[:order][:postal_cost].to_i
+    order.save
     create_ordre_ditails(order)
     redirect_to customer_order_complete_path
   end
-  
+
   def index
   end
-  
+
   def show
   end
-  
+
   private
-  
+
   def order_params
     params.require(:order).permit(:payment_method, :postal_code, :address, :name)
   end
-  
-  def my_address(order)
-    order.postal_code = current_customer.postal_code
-    order.address = current_customer.address
-    order.name = current_customer.last_name + current_customer.first_name
+
+  def set_order_address(order, postal_code, address, name)
+    order.postal_code = postal_code
+    order.address = address
+    order.name = name
     return order
   end
-  
-  def registered_address(order, address)
-    order.postal_code = address.postal_code
-    order.address = address.address
-    order.name = address.name
-    return order
-  end
-  
+
   def order_confirmed
     order = Order.new(order_params)
     order.customer_id = current_customer.id
@@ -76,7 +76,7 @@ class Customer::OrdersController < ApplicationController
     order.save
     return order
   end
-  
+
   def create_ordre_ditails(order)
     current_customer.cart_items.each do |cart_item|
       order_detail = OrderDetail.new
@@ -88,6 +88,4 @@ class Customer::OrdersController < ApplicationController
     end
     current_customer.cart_items.destroy_all
   end
-  
-  
 end
