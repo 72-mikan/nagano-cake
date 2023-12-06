@@ -1,11 +1,9 @@
-<%= render '/layouts/customer_header' %>
-
 <div class="container">
-  
+
   <div class="row">
     <h2>配送先編集</h2>
   </div>
-  
+
   <div class="row">
     <% if @address.errors.any? %>
       <%= @address.errors.count %>件のエラーが発生しました
@@ -16,7 +14,7 @@
       </ul>
     <% end %>
   </div>
-  
+
   <div class="row">
     <table>
     <%= form_with model: @address, url: customer_address_path(@address.id), local: true do |f| %>
@@ -26,12 +24,12 @@
           <%= f.text_field :postal_code %>
         </th>
       </tr>
-      
+
       <tr>
         <th>住所</th>
         <th><%= f.text_field :address %></th>
       </tr>
-      
+
       <tr>
         <th>宛名</th>
         <th><%= f.text_field :name %></th>
@@ -40,5 +38,5 @@
     <% end %>
     </table>
   </div>
-  
+
 </div>

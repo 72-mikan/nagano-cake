@@ -1,13 +1,11 @@
-<%= render '/layouts/admin_header' %>
-
 <div class="container">
   <h2>商品新規登録</h2>
 
   <div class="row">
     <div class="col-md-3">
-      
+
     </div>
-    
+
     <div class="col-md-8 offset-md-1">
       <%= form_with model: @item, url: admin_items_path, loacl: true do |f| %>
         <table>
@@ -44,6 +42,6 @@
         <%= f.submit "新規登録", class:"btn btn-success" %>
       <% end %>
     </div>
-    
+
   </div>
 </div>

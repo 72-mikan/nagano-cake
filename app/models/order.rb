@@ -8,7 +8,13 @@ class Order < ApplicationRecord
   validates :payment_method, presence: true
 
   has_many :order_details, dependent: :destroy
-
+  
+  # フルアドレス
+  def full_address
+    '〒' + self.postal_code + ' ' + self.address
+  end
+  
+  # 個数合計
   def total_amount
     total = 0
     order_details.each do |order_detail|
@@ -16,7 +22,8 @@ class Order < ApplicationRecord
     end
     return total
   end
-
+  
+  # 商品合計
   def total_payment
     total = 0
     order_details.each do |order_detail|
@@ -24,4 +31,5 @@ class Order < ApplicationRecord
     end
     return total
   end
+  
 end

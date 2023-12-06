@@ -1,20 +1,23 @@
 class Public::AddressesController < ApplicationController
+  # 配送先登録一覧ページ処理
   def index
     @addresses = current_customer.addresses
     @address = Address.new
   end
   
+  # 配送先登録処理
   def create
     @address = Address.new(address_params)
     @address.customer_id = current_customer.id
     if @address.save
-      redirect_to customer_addresses_path
+      redirect_to addresses_path
     else
       @addresses = current_customer.addresses
       render :index
     end
   end
   
+  # 配送先登録編集ページ処理
   def edit
     customer = current_customer
     @address = Address.find(params[:id])
@@ -23,6 +26,7 @@ class Public::AddressesController < ApplicationController
     end
   end
   
+  # 配送先登録編集処理
   def update
     @address = Address.find(params[:id])
     if @address.update(address_params)
@@ -32,14 +36,15 @@ class Public::AddressesController < ApplicationController
     end
   end
   
+  # 配送先登録削除処理
   def destroy
     address = Address.find(params[:id])
     address.destroy
-    redirect_to customer_addresses_path
+    redirect_to addresses_path
   end
-  
+
   private
-  
+
   def address_params
     params.require(:address).permit(:postal_code, :address, :name)
   end

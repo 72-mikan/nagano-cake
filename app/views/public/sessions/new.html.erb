@@ -1,8 +1,7 @@
-<%= render '/layouts/customer_header' %>
-
 <h2>Log in</h2>
 
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+<%= form_with model: @customer, url: customer_session_path do |f| %>
+<%#= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
   <div class="field">
     <%= f.label :email %><br />
     <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
@@ -25,4 +24,4 @@
   </div>
 <% end %>
 
-<%= render "customer/shared/links" %>
+<%= render "public/shared/links" %>
