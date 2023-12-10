@@ -1,10 +1,8 @@
-<%= render '/layouts/admin_header' %>
-
 <div class="container">
   <h2>ジャンル一覧・追加</h2>
-  
+
   <div class="row">
-    
+
     <% if @genre.errors.any? %>
       <%= @genre.errors.count %>件のエラーが発生しました
       <ul>
@@ -13,11 +11,11 @@
         <% end %>
       </ul>
     <% end %>
-    
+
   </div>
-  
+
   <div class="row">
-    
+
     <%= form_with model: @genre, url: admin_genres_path, local: true do |f| %>
       <table>
         <tr>
@@ -27,9 +25,9 @@
         </tr>
       </table>
     <% end %>
-    
+
   </div>
-  
+
   <div class="row">
     <table>
       <thead>
@@ -38,7 +36,7 @@
           <th></th>
         </tr>
       </thead>
-      
+
       <tbody>
         <% @genres.each do |genre| %>
           <tr class="border-top border-bottom">
@@ -48,6 +46,6 @@
         <% end %>
       </tbody>
     </table>
-    
+
   </div>
 </div>

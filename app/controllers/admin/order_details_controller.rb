@@ -4,7 +4,7 @@ class Admin::OrderDetailsController < ApplicationController
     order_detail = OrderDetail.find(params[:id])
     order_detail.update(order_detail_params)
     order = order_detail.order
-    change_status(order_detail, order)
+    change_status(order_detail, order) # ステータス変更
     redirect_to admin_order_path(order_detail.order.id)
   end
   
