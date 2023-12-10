@@ -8,7 +8,7 @@
             <div><%= link_to '全て', items_path %></div>
             <% @genres.each do |genre| %>
               <div>
-                <%= link_to genre.name, items_path(name: genre.name) %>
+                <%= link_to genre.name, items_path(genre_id: genre.id, name: genre.name) %>
               </div>
             <% end %>
           </div>

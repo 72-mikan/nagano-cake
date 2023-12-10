@@ -1,9 +1,11 @@
 class Public::ItemsController < ApplicationController
 
   def index
-    if params[:name] != nil
-      @items = Genre.find_by("name LIKE?", "%#{params[:name]}%").items
-      @genre_type = params[:name]
+    genre_id = params[:genre_id]
+    genre_name = params[:name]
+    if genre_id != nil
+      @items = Item.where(genre_id: genre_id)
+      @genre_type = genre_name
       @item_count = @items.where(is_active: true).count
     else
       @items = Item.all
