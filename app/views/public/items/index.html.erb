@@ -2,13 +2,16 @@
   <div class="row">
     <div class="col-md-3">
       <h2>ジャンル検索</h2>
+      <div><%= link_to '全て', items_path %></div>
       <% @genre.each do |genre| %>
-        <%= link_to genre.name, items_path(genre_id: genre.id) %></br>
+        <div>
+          <%= link_to genre.name, items_path(name: genre.name) %>
+        </div>
       <% end %>
     </div>
 
     <div class="col-md-8 offset-md-1">
-      <h2><%= @item_type %></h2>
+      <h2><%= '商品一覧(' + @item_type + ')' %></h2>
       <p>(全<%= @item_count %>件)</p>
       <div class="container">
         <div class="row">

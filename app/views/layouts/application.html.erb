@@ -6,11 +6,11 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    
+
     <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
-  
+
   <header>
     <header class="shadow-sm">
       <nav class="navbar navbar-expand-lg navbar-light">
@@ -22,7 +22,7 @@
           <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav ml-auto">
               <% if request.path.match(/\/admin(\/)?/) %>
-                <%= render 'laymouts/admin_header' %>
+                <%= render 'layouts/admin_header' %>
               <% else %>
                 <%= render 'layouts/customer_header' %>
               <% end %>

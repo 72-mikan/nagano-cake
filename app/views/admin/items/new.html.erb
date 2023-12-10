@@ -2,6 +2,17 @@
   <h2>商品新規登録</h2>
 
   <div class="row">
+    <% if @item.errors.any? %>
+      <%= @item.errors.count %>件のエラーが発生しました
+      <ul>
+        <% @item.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    <% end %>
+  </div>
+
+  <div class="row">
     <div class="col-md-3">
 
     </div>
