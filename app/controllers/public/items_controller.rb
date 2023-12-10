@@ -4,7 +4,7 @@ class Public::ItemsController < ApplicationController
     if params[:name] != nil
       @items = Genre.find_by("name LIKE?", "%#{params[:name]}%").items
       @genre_type = params[:name]
-      @item_count = Item.where("name LIKE?", "%#{params[:name]}%").where(is_active: true).count
+      @item_count = @items.where(is_active: true).count
     else
       @items = Item.all
       @genre_type = "全て"
