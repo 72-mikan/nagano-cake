@@ -10,8 +10,7 @@ class Public::ItemsController < ApplicationController
       @item_type = "全て"
       @item_count = Item.where(is_active: true).count
     end
-    @tax = 1.08
-    @genre = Genre.all
+    @genres = Genre.all
   end
 
   def show
