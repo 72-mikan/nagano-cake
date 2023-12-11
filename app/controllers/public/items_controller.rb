@@ -13,6 +13,7 @@ class Public::ItemsController < ApplicationController
       @item_count = Item.where(is_active: true).count
     end
     @genres = Genre.all
+    @cart_item = CartItem.new
   end
 
   def show

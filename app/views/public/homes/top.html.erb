@@ -35,7 +35,7 @@
                 <div class="card-body px-2 py-3">
                   <h5 class="card-title"><%= link_to item.name, item_path(item.id) %></h5>
                   <p class="card-text">￥<%= item.with_tax_price %> (税込価格)</p>
-                  <a href="#" class="btn btn-primary">カートに追加</a>
+                  <%= render 'public/items/modal_form', cart_item: @cart_item, item: item %>
                 </div>
               </div>
             <% end %>
