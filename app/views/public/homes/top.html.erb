@@ -1,6 +1,8 @@
 <div class="container-fluid">
   <div class="row">
     <%= link_to "管理者ページ", admin_path %>
+    <%#= javascript_pack_tag 'set-form-data.js' %>
+    <%= javascript_pack_tag './scripts/set-form-data.js' %>
   </div>
 
   <div class="row">
@@ -22,27 +24,9 @@
 
     <div class="col-md-9">
       <h2>新作商品</h2>
-      <div class="container-fluid">
-        <div class="row">
-          <% @items.each do |item| %>
-            <% if item.is_active == true %>
-              <div class="card m-2 d-block" style="width: 16rem;">
-                <%= link_to item_path(item.id) do %>
-                  <div class="card-header p-0">
-                    <%= image_tag item.get_image(200,200), class: "card-img-top" %>
-                  </div>
-                <% end %>
-                <div class="card-body px-2 py-3">
-                  <h5 class="card-title"><%= link_to item.name, item_path(item.id) %></h5>
-                  <p class="card-text">￥<%= item.with_tax_price %> (税込価格)</p>
-                  <%= render 'public/items/modal_form', cart_item: @cart_item, item: item %>
-                </div>
-              </div>
-            <% end %>
-          <% end %>
-        </div>
-      </div>
+      <%= render 'public/items/list', items: @items, cart_item: @cart_item %>
     </div>
 
   </div>
 </div>
+

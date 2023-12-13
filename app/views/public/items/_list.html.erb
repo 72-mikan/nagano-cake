@@ -1,0 +1,41 @@
+<div class="container-fluid">
+  <div class="row">
+    <% items.each do |item| %>
+      <% if item.is_active == true %>
+        <div class="card m-2 d-block" style="width: 16rem;">
+          <%= link_to item_path(item.id) do %>
+            <div class="card-header p-0">
+              <%= image_tag item.get_image(200,200), class: "card-img-top" %>
+            </div>
+          <% end %>
+          <div class="card-body px-2 py-3">
+            <h5 class="card-title"><%= link_to item.name, item_path(item.id) %></h5>
+            <p class="card-text">￥<%= item.with_tax_price %> (税込価格)</p>
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#newPostModal" data-item="item">カートに入れる</button>
+
+            <div class="modal fade" id="newPostModal" tabindex="-1" role="dialog" aria-labelledby="newPostModalLabel" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="newPostModalLabel"><%= item.name %>の個数を選択してください</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="閉じる">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <%= form_with model: cart_item, url: cart_items_path, local: true do |f| %>
+                      <%= f.hidden_field :item_id, value: item.id%>
+                      <%= f.select :amount, *[1..9], { include_blank: "個数" }, class: "form-control" %>
+                      <%= f.submit "カートに入れる", class: "btn btn-success" %>
+                    <% end %>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+</div>
