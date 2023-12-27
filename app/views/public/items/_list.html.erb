@@ -11,9 +11,9 @@
           <div class="card-body px-2 py-3">
             <h5 class="card-title"><%= link_to item.name, item_path(item.id) %></h5>
             <p class="card-text">￥<%= item.with_tax_price %> (税込価格)</p>
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#newPostModal" data-item="item">カートに入れる</button>
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#newPostModal-<%= item.id %>" data-item="item">カートに入れる</button>
 
-            <div class="modal fade" id="newPostModal" tabindex="-1" role="dialog" aria-labelledby="newPostModalLabel" aria-hidden="true">
+            <div class="modal fade" id="newPostModal-<%= item.id %>" tabindex="-1" role="dialog" aria-labelledby="newPostModalLabel" aria-hidden="true">
               <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                   <div class="modal-header">

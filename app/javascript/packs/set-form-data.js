@@ -1,6 +1,8 @@
-$('#myModal').on('show.bs.modal', function (event) {
-    var button = $(event.relatedTarget);
-    var sampledata = button.data('sample');
-    var modal = $(this);
-    modal.find('.modal-title').val(sampledata);
-  })
+// const myModal = new bootstrap.Modal(document.getElementById('newPostModal'), {});
+// function setData(){
+//   // let modalTitle = document.querySelector("modal-title");
+//   alert(document.getElementById("modal-button1").value);
+// }
+
+// let btn = document.querySelector(".modal-button");
+// btn.addEvwntListener("click", setData);
