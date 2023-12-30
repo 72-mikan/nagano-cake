@@ -1,5 +1,6 @@
 class Public::CartItemsController < ApplicationController
   # カート内商品一覧ページ
+  # カート内商品一覧データの
   def index
     @cart_items = current_customer.cart_items
     @sum = 0
@@ -16,23 +17,18 @@ class Public::CartItemsController < ApplicationController
   #      - 新規保存
   # 4. 商品一覧に遷移
   def create
-    amount = cart_item_params[:amount]
-    item_id = cart_item_params[:item_id]
-    if amount == '' # 商品個数の判定
+    if cart_item_params[:amount].empty? # 商品個数の判定
       flash[:item_error] = '個数を入力して下さい'
-      redirect_to item_path(item_id)
+      redirect_to item_path(cart_item_params[:item_id])
       return
     end
-    if cart_item = CartItem.find_by(item_id: item_id) # 同一商品あり処理
-      amount = cart_item.amount + amount.to_i
-      if amount <= 9 # 個数上限判定
-        cart_item.update(amount: amount)
-      else
-        cart_item.update(amount: 9)
-      end
+
+    if cart_item = current_customer.cart_items.find_by(item_id: cart_item_params[:item_id]) # 同一商品あり処理
+      # 商品数更新
+      cart_item.item_amount_update(cart_item_params[:amount])
     else # 同一商品なし処理
       cart_item = CartItem.new(cart_item_params)
-      cart_item.customer_id = current_customer.id
+      cart_item.customer_id = customer.id
       cart_item.save
     end
     redirect_to cart_items_path
