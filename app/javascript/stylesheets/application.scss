@@ -1,0 +1,19 @@
+@import '~bootstrap/scss/bootstrap';
+@import '~@fortawesome/fontawesome-free/scss/fontawesome';
+
+// .card-img-top {
+//   max-width: 100%;
+//   flex-shrink:0;
+// }
+
+.card-img-top {
+  margin-right: 10px;
+  width: 255px;
+  height: 175px;
+  border: 1px solid #ddd;
+  object-fit: contain;
+}
+
+main {
+  padding-top: 80px;
+}

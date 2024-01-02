@@ -1,0 +1,31 @@
+<div class="container-fluid">
+  <div class="row">
+    <%= link_to "管理者ページ", admin_path %>
+    <%#= javascript_pack_tag 'set-form-data.js' %>
+    <%#= javascript_pack_tag './scripts/set-form-data.js' %>
+  </div>
+
+  <div class="row">
+    <div class="col-md-3">
+      <div class="row">
+        <div class="col text-center">
+          <h2 class="test">ジャンル検索</h2>
+          <div class="border border-dark p-4">
+            <div><%= link_to '全て', items_path %></div>
+            <% @genres.each do |genre| %>
+              <div>
+                <%= link_to genre.name, items_path(genre_id: genre.id, name: genre.name) %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-9">
+      <h2>新作商品</h2>
+      <%= render 'public/items/list', items: @items, cart_item: @cart_item %>
+    </div>
+
+  </div>
+</div>
