@@ -10,6 +10,10 @@ FactoryBot.define do
     email { "tester@example.com" }
     password { "testabcd" }
 
+    trait :other_customer do
+      sequence(:email) { |n| "tester#{n}@example.com"}
+    end
+
     # シーケンスメールアドレス
     trait :sequence_email do
       sequence(:email) { |n| "tester#{n}@example.com"}
