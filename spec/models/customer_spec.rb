@@ -152,14 +152,4 @@ RSpec.describe "Customerモデルのテスト", type: :model do
     end
   end
 
-  describe "アソシエーションのテスト" do
-    context "正常のテスト" do
-
-    end
-
-    context "異常のテスト" do
-
-    end
-  end
-
 end
