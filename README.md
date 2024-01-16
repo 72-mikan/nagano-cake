@@ -22,3 +22,13 @@
 6. 注文機能 → 6_feature_orders
 7. 検索機能 → 7_feature_search
 8. ジャンル検索機能 → 8_genre_search
+
+## 設計書
+- ER図
+https://drive.google.com/file/d/1Nd99zgL3KuQh2gBC_JQIYJIhrOOSzVn4/view?usp=sharing
+
+- テーブル定義書
+https://docs.google.com/spreadsheets/d/1GMmnMx6haQGRtS5CNaHqYg9YQxch7uu-m3hw-EHThMo/edit?usp=drive_link
+
+- アプリケーション詳細設計書
+https://docs.google.com/spreadsheets/d/1_NwcyS4UFEkhgsMxPG4dy0MWpo4NTGjuQxXCzCWFJSQ/edit?usp=sharing
