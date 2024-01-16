@@ -23,8 +23,7 @@
     <%= f.submit "Log in" %>
   </div>
 <% end %>
-<div>
-  <%= link_to 'ゲストの方はこちらから', guest_path, method: :post %>
-</div>
+
+<%= link_to "ゲストの方はこちらから", guest_path, method: :post %>
 
 <%= render "public/shared/links" %>
