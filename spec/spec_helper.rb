@@ -13,7 +13,16 @@
 # it.
 #
 # See https://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
+require 'capybara/rspec'
+
+Capybara.register_driver :firefox do |app|
+ Capybara::Selenium::Driver.new(app, :browser => :firefox)
+end
+
 RSpec.configure do |config|
+  config.before(:each) do
+    Capybara.current_driver = :firefox
+  end
   # rspec-expectations config goes here. You can use an alternate
   # assertion/expectation library such as wrong or the stdlib/minitest
   # assertions if you prefer.

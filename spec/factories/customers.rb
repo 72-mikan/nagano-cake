@@ -10,9 +10,36 @@ FactoryBot.define do
     email { "tester@example.com" }
     password { "testabcd" }
 
+    trait :other_customer do
+      sequence(:email) { |n| "tester#{n}@example.com"}
+    end
+
     # シーケンスメールアドレス
     trait :sequence_email do
       sequence(:email) { |n| "tester#{n}@example.com"}
+    end
+
+    # 編集データ
+    trait :edit_customer do
+      last_name { "鈴木" }
+      first_name { "一郎" }
+      last_name_kana { "スズキ" }
+      first_name_kana { "イチロウ" }
+      postal_code { "5428503" }
+      address { "大阪府大阪市中央区難波５丁目1番60号" }
+      telephone_number { "33344445555" }
+      email { "testeredit@example.com" }
+    end
+    
+    trait :guest_customer do
+      last_name { "guest" }
+      first_name { "customer" }
+      last_name_kana { "ゲスト" }
+      first_name_kana { "カスタマー" }
+      postal_code { "1112222" }
+      address { "guest address" }
+      telephone_number { "00011112222" }
+      email { "customer.guest@example.com" }
     end
 
     # trait :with_addresses do

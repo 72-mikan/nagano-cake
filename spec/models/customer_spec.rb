@@ -120,7 +120,7 @@ RSpec.describe "Customerモデルのテスト", type: :model do
 
   end
 
-  describe "メソッドのテスト" do
+  describe "インスタンスメソッドのテスト" do
     context "正常のテスト" do
       # 顧客のフルネームを文字列として返すこと
       it "顧客のフルネームを文字列として返すか？" do
@@ -151,14 +151,14 @@ RSpec.describe "Customerモデルのテスト", type: :model do
       end
     end
   end
-
-  describe "アソシエーションのテスト" do
-    context "正常のテスト" do
-
+  
+  describe "クラスメソッドのテスト" do
+    it "ゲストアカウントが作成される" do
+      expect{Customer.guest}.to change(Customer, :count).by(1)
     end
-
-    context "異常のテスト" do
-
+    
+    it "ゲストアカウントのメールがcustomer.guest@example.comである" do
+      expect(Customer.guest.email).to eq "customer.guest@example.com"
     end
   end
 
