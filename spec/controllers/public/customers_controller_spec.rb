@@ -266,4 +266,32 @@ RSpec.describe Public::CustomersController, type: :controller do
       end
     end
   end
+  
+  describe "guest_updateアクションのテスト" do
+    context "ゲストログインしている" do
+      before do
+        @customer = Customer.guest
+      end
+      
+      it "マイページにリダイレクトされる" do
+        sign_in @customer
+        patch :update
+        expect(response).to redirect_to "/customers/my_page"
+      end
+    end
+  end
+  
+  describe "guest_withdrawアクションのテスト" do
+    context "ゲストログインしている" do
+      before do
+        @customer = Customer.guest
+      end
+      
+      it "ルートページにリダイレクトされる" do
+        sign_in @customer
+        patch :withdraw
+        expect(response).to redirect_to "/"
+      end
+    end
+  end
 end

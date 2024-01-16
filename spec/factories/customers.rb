@@ -30,6 +30,17 @@ FactoryBot.define do
       telephone_number { "33344445555" }
       email { "testeredit@example.com" }
     end
+    
+    trait :guest_customer do
+      last_name { "guest" }
+      first_name { "customer" }
+      last_name_kana { "ゲスト" }
+      first_name_kana { "カスタマー" }
+      postal_code { "1112222" }
+      address { "guest address" }
+      telephone_number { "00011112222" }
+      email { "customer.guest@example.com" }
+    end
 
     # trait :with_addresses do
     #   after(:create) { |customer| create_list{:address, 5, }}

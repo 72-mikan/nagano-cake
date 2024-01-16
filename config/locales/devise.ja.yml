@@ -1,4 +1,8 @@
 ja:
+  devise:
+    sessions:
+      customer:
+        signed_out: "ログアウトしました。"
   errors:
     messages:
       not_saved: "以下の原因で保存されませんでした。"

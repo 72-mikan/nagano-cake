@@ -33,5 +33,19 @@ class Customer < ApplicationRecord
     end
     return total
   end
+  
+  def self.guest
+    self.find_or_create_by!(email: "customer.guest@example.com") do |customer|
+      customer.last_name = 'guest'
+      customer.first_name = 'customer'
+      customer.last_name_kana = 'ゲスト'
+      customer.first_name_kana = 'カスタマー'
+      customer.postal_code = '1112222'
+      customer.address = 'guest address'
+      customer.telephone_number = '00011112222'
+      customer.password = SecureRandom.urlsafe_base64
+      customer.password_confirmation = customer.password
+    end
+  end
 
 end
