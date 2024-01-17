@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   }
   
   devise_scope :customer do
-    post 'customer/guest_sign_in' => 'public/sessions#guest_sign_in', as: :guest
+    get 'customer/guest_sign_in' => 'public/sessions#guest_sign_in', as: :guest
   end
 
   get '/admin' => 'admin/homes#top'
