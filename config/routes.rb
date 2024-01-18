@@ -2,13 +2,14 @@ Rails.application.routes.draw do
   devise_for :admin, skip: [:registrations, :passwords], controllers: {
     sessions: "admin/sessions"
   }
-
+  
+  get 'customers/sign_in' => 'homes#top'
   devise_for :customers, skip: [:passwords], controllers: {
     registrations: "public/registrations",
     sessions: "public/sessions"
   }
   
-  devise_scope :customers do
+  devise_scope :customer do
     get 'customer/guest_sign_in' => 'public/sessions#guest_sign_in', as: :guest
   end
 
